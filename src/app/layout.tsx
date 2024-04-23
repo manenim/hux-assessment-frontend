@@ -1,8 +1,8 @@
-import AuthProviders from "@/components/providers";
-import Providers from "@/redux/provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
+import Providers from "@/components/providers";
+import NavbarComponent from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AuthProviders>
-          <Providers>{children}</Providers>
-        </AuthProviders>
+      <body>
+        <NavbarComponent />
+
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
