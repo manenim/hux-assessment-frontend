@@ -1,14 +1,14 @@
 "use client"
 
 import Image from "next/image";
-import type { RootState } from "../redux/store";
+import type { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../redux/features/counter/counterSlice";
+import { decrement, increment } from "../../redux/features/counter/counterSlice";
 import { useGetAllProductsQuery } from "@/services/dummydata";
 import SignButtons from "@/components/signButtons";
 
 export default function Home() {
-  const count = useSelector((state: RootState) => state.counter.value);
+  const count = useSelector((state: RootState) => state.counter.value as number);
   const dispatch = useDispatch();
 
   const { data, isError, isLoading } = useGetAllProductsQuery('')
@@ -27,8 +27,7 @@ export default function Home() {
       <span>{count}</span>
       <button
         aria-label="Decrement value"
-        onClick={() => dispatch(decrement())}>
-        Decrement
+        onClick={() => dispatch(decrement())}>        Decrement
       </button>
       {/* {data && } */}
     </main>

@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
 
         const { username, password } = credentials;
 
-        const res = await fetch("http://localhost:3002/auth/login", {
+        const res = await fetch("http://localhost:3005/auth/login", {
           method: "POST",
           body: JSON.stringify({ email: username, password }),
           headers: {
@@ -33,7 +33,6 @@ export const authOptions: NextAuthOptions = {
           return user;
         } else {
           return null;
-
         }
       },
     }),
@@ -49,6 +48,7 @@ export const authOptions: NextAuthOptions = {
     async session({ token, session }) {
       session.user = token.user;
       session.accessToken = token.accessToken;
+      session.refreshToken = token.refreshToken;
       return session;
     },
   },
