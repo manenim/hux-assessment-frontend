@@ -8,9 +8,13 @@ import {
 } from "@nextui-org/navbar";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 
-export default function NavbarComponent() {
+export default async function NavbarComponent() {
+
+    const session = await getServerSession(authOptions)
   return (
     <Navbar>
       <NavbarBrand>

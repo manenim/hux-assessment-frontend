@@ -8,7 +8,8 @@ export default function LoginForm() {
       <Input type="email" label="Email" />
       <Input
         type="password"
-        label="Passwod"
+              label="Passwod"
+              
         placeholder="Enter your password"
       />
       <Button>Login</Button>

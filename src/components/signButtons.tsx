@@ -8,6 +8,8 @@ type Props = {}
 const SignButtons = (props: Props) => {
     const { data: session } = useSession();
 
+  
+  console.log('first', session)
     if (session && session.user) {
         return (
             <Link href={"/api/auth/signout"}>
