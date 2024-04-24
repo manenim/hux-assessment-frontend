@@ -1,20 +1,28 @@
 "use client"
+import { Button } from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
+// import { useRouter } from "next/router";
 
 type Props = {}
 
 const SignButtons = (props: Props) => {
     const { data: session } = useSession();
 
+  const handleSignOut = async () => {
+    const data = await signOut({ callbackUrl: "/signup" })
+    // useRouter().push(data.url)
+  }
+
   
   console.log('first', session)
     if (session && session.user) {
         return (
-            <Link href={"/api/auth/signout"}>
+            <Button onClick={handleSignOut}>
                 sign out
-            </Link>
+            </Button>
         )
     }
     return (
