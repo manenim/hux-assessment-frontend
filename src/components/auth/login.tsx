@@ -4,6 +4,8 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { FormEvent, useRef } from "react";
+    import { redirect } from "next/navigation";
+
 
 type FormInput = {
   username: string;
@@ -25,12 +27,13 @@ export default function LoginForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log(formdata.current)
-    signIn("credentials", formdata.current);
+    await signIn("credentials", formdata.current);
+    redirect("/contacts");
   };
 
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-      <div className="w-full h-full">
+      <div className="w-full h-full pt-20">
         <div className="w-full h-full flex items-center justify-center">
           <form
             onSubmit={handleSubmit}
@@ -51,7 +54,7 @@ export default function LoginForm() {
               className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
             />
             <div className="w-full flex items-center justify-center">
-              <Button className="py-8 px-12 cursor-pointer">Add Contact</Button>
+              <Button type="submit" className="py-8 px-12 cursor-pointer">Login</Button>
             </div>
           </form>
         </div>

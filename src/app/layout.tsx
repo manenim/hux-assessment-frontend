@@ -2,6 +2,8 @@ import NavbarComponent from "@/components/navbar";
 import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import toast, { Toaster } from "react-hot-toast";
+
 import "./globals.css";
 
 export const poppins = Poppins({
@@ -23,9 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavbarComponent />
 
         <Providers>
+        <NavbarComponent />
+          <Toaster position="bottom-center" />
           <div className={poppins.className}>{children}</div>
         </Providers>
       </body>

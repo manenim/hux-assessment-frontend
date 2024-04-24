@@ -3,6 +3,7 @@
 import React, { FormEvent, useRef } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useSignupMutation } from "@/services/usersdata";
+import toast from "react-hot-toast";
 
 type FormInput = {
     firstname: string;
@@ -13,7 +14,7 @@ type FormInput = {
 
 export default function SignupForm() {
 
-    const [signup, {data, isError, isLoading, error}] = useSignupMutation()
+    const [signup, {data, isError, isLoading}] = useSignupMutation()
     
     
 
@@ -29,6 +30,7 @@ export default function SignupForm() {
         try {
             e.preventDefault();
           await signup(formdata.current);
+           toast.success("Succesfully registered, Login!");
           console.log(data)
         } catch (error) {
             console.error(error)
@@ -40,12 +42,12 @@ export default function SignupForm() {
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <div className="w-full h-full">
+        <div className="w-full h-full pt-20">
           <div className="w-full h-full flex items-center justify-center">
             <form
               onSubmit={handleSubmit}
               className="border border-gray-300 rounded-xl w-[40%]  min-h-[40%] pt-5 pb-10">
-              <h1 className="text-[1.5rem] text-center">Login</h1>
+              <h1 className="text-[1.5rem] text-center">Sign Up</h1>
               <Input
                 type="text"
                 required
@@ -75,7 +77,9 @@ export default function SignupForm() {
                 className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
               />
               <div className="w-full flex items-center justify-center">
-                <Button type="submit" className="py-8 px-12 cursor-pointer">
+                <Button
+                  type="submit"
+                  className="py-8 px-12 cursor-pointer bg-[#00246B] text-white">
                   Add Contact
                 </Button>
               </div>
