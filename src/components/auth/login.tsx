@@ -30,22 +30,32 @@ export default function LoginForm() {
 
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="email"
-          required
-          onChange={(e) => (formdata.current.username = e.target.value)}
-          label="Email"
-        />
-        <Input
-          type="password"
-          label="Passwod"
-          required
-          onChange={(e) => (formdata.current.password = e.target.value)}
-          placeholder="Enter your password"
-        />
-        <Button type="submit">Sign Up</Button>
-      </form>
+      <div className="w-full h-full">
+        <div className="w-full h-full flex items-center justify-center">
+          <form
+            onSubmit={handleSubmit}
+            className="border border-gray-300 rounded-xl w-[40%]  min-h-[40%] pt-5 pb-10">
+            <h1 className="text-[1.5rem] text-center">Login</h1>
+            <Input
+              type="email"
+              required
+              onChange={(e) => (formdata.current.username = e.target.value)}
+              placeholder="Email"
+              className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+            />
+            <Input
+              type="password"
+              required
+              onChange={(e) => (formdata.current.password = e.target.value)}
+              placeholder="Enter your password"
+              className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+            />
+            <div className="w-full flex items-center justify-center">
+              <Button className="py-8 px-12 cursor-pointer">Add Contact</Button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

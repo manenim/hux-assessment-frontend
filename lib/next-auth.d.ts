@@ -12,6 +12,7 @@ declare module "next-auth" {
     tokens: {
       accessToken: string;
       refreshToken: string;
+      expiresIn: number;
     };
   }
 }
@@ -20,19 +21,17 @@ import "next-auth/jwt";
 
 declare module "next-auth/jwt" {
   interface JWT {
-    
-
-      user: {
-        id: string;
-        name: number;
-        password: string;
-        email: string;
-        role: string;
-      };
-      tokens: {
-        accessToken: string;
-        refreshToken: string;
-      };
-    
+    user: {
+      id: string;
+      name: number;
+      password: string;
+      email: string;
+      role: string;
+    };
+    tokens: {
+      accessToken: string;
+      refreshToken: string;
+      expiresIn: number;
+    };
   }
 }

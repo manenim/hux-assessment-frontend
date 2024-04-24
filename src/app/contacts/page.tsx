@@ -1,15 +1,34 @@
-import { getServerSession } from 'next-auth';
-import React from 'react'
-import { authOptions } from '../api/auth/[...nextauth]/route';
+"use client";
 
-type Props = {}
+import Cards from "@/components/cards";
+import Sidebar from "@/components/sidebar";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
-const ContactList = async (props: Props) => {
-  const session = await getServerSession(authOptions);
-  console.log("hi", session);
+type Props = {};
+
+const ContactList = (props: Props) => {
+  const { data: session } = useSession();
+
+  console.log(session);
+
+  // const { data, isError, isLoading, error } = useGetAllContactsQuery(session?.tokens.accessToken);
+
+  // console.log(data)
+  // console.log(error)
+
   return (
-    <div>ContactList</div>
-  )
-}
+    <div>
+      <div className="grid grid-cols-3 gap-x-4 gap-y-20 pt-20 pl-8">
+        <Link href="contacts/123">
+          <Cards />
+        </Link>
+        <Cards />
+        <Cards />
+        <Cards />
+      </div>
+    </div>
+  );
+};
 
-export default ContactList
+export default ContactList;

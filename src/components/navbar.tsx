@@ -14,12 +14,11 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function NavbarComponent() {
 
-    const session = await getServerSession(authOptions)
   return (
-    <Navbar>
+    <Navbar className="bg-[#00246B] text-white h-20 ">
       <NavbarBrand>
         {/* <AcmeLogo /> */}
-        <p className="font-bold text-inherit">ACME</p>
+        <p className="font-bold text-inherit text-xl">ACME</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
@@ -40,10 +39,17 @@ export default async function NavbarComponent() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="login">Login</Link>
+          <Link className="text-lg" href="login">
+            Login
+          </Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="/signup" variant="flat">
+          <Button
+            className="text-lg"
+            as={Link}
+            color="primary"
+            href="/signup"
+            variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
