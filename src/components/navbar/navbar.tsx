@@ -1,20 +1,13 @@
-import React from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
- 
 } from "@nextui-org/navbar";
 import Link from "next/link";
-import { Button } from "@nextui-org/button";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import NavButtons from "./navButtons";
 
-
 export default async function NavbarComponent() {
-
   return (
     <Navbar className="bg-[#00246B] text-white h-20 ">
       <NavbarBrand>

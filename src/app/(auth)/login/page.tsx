@@ -1,19 +1,21 @@
-
 "use client"
 
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import LoginForm from '@/components/auth/login'
+import { getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react'
     import { redirect } from "next/navigation";
 
 
-import React from 'react'
 
 type Props = {}
 
 const Login = (props: Props) => {
-  const { data: session } = useSession()
-  
-  if (session) {
+  const session = useSession()
+  if (session.status == "loading") {
+    return <h1>Please wait</h1>
+  }
+  if (session.status == "authenticated") {
     redirect("/contacts");
   }
   return (

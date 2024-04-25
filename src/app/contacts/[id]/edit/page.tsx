@@ -21,13 +21,13 @@ type Props = {
 }
 
 const EditContact = (props: Props) => {
-  const [updateContact, { isLoading, error }] = useUpdateContactMutation(); 
+  // const [updateContact, { isLoading, error }] = useUpdateContactMutation(); 
     const id = props.params.id;
 
   
-    const { data: session } = useSession();
+  //   const { data: session } = useSession();
 
-  const token = session?.tokens.accessToken;
+  // const token = session?.tokens.accessToken;
 
   const formdata = useRef<FormInput>({
     firstname: "",
@@ -37,13 +37,13 @@ const EditContact = (props: Props) => {
 
   const handleUpdateContact = async (e: any) => {
     e.preventDefault();
-    try {
-      await updateContact({ token, formdata, id });
-      redirect("/contacts");
-      // Handle success (e.g., show a success message)
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   await updateContact({ token, formdata, id });
+    //   redirect("/contacts");
+    //   // Handle success (e.g., show a success message)
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
   return (
     <div className="w-full h-full">

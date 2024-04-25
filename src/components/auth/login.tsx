@@ -14,8 +14,8 @@ type FormInput = {
 
 export default function LoginForm() {
 
-    const { data: session } = useSession()
-    console.log('sess', session)
+    // const { data: session } = useSession()
+    // console.log('sess', session)
 
   const formdata = useRef<FormInput>({
     username: "",
@@ -25,10 +25,16 @@ export default function LoginForm() {
   console.log(formdata);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    e.preventDefault()
+    try {
       console.log(formdata.current)
-    await signIn("credentials", formdata.current);
-    redirect("/contacts");
+      const res = await signIn("credentials", formdata.current);
+      console.log(res, 'res')
+    // redirect("/contacts");
+      
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

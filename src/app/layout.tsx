@@ -1,8 +1,7 @@
-import NavbarComponent from "@/components/navbar";
-import Providers from "@/components/providers";
+import NavbarComponent from "@/components/navbar/navbar";
+import Providers from "@/app/_providers";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import toast, { Toaster } from "react-hot-toast";
 
 import "./globals.css";
 
@@ -25,10 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-
         <Providers>
-        <NavbarComponent />
-          <Toaster position="bottom-center" />
+          <NavbarComponent />
+          {/* <Toaster position="bottom-center" /> */}
           <div className={poppins.className}>{children}</div>
         </Providers>
       </body>
