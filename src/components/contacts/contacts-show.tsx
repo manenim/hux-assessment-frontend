@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 import { Contact } from "../../../types/types";
 import ContactCard from "./contact-card";
 import Link from "next/link";
+import ContactLoading from "./contact-loading";
 
 const ContactsShow = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   if (status === "loading") {
-    return <h1>Loading...</h1>;
+    return <ContactLoading />
   }
 
   if (status === "unauthenticated") {
@@ -25,7 +26,7 @@ const ContactsShow = () => {
   } = useGetAllContactsQuery(session?.tokens.accessToken);
 
   if (isLoading) {
-    return <h1>Loading contacts...</h1>;
+    return <ContactLoading />;
   }
 
   if (error) {
@@ -35,9 +36,7 @@ const ContactsShow = () => {
   return (
     <div className="grid grid-cols-3 gap-4 p-8">
       {contacts?.map((contact: Contact) => (
-        <Link href={`/contacts/${contact.id}`}>
-          <ContactCard key={contact.id} contact={contact} />
-        </Link>
+        <ContactCard key={contact.id} contact={contact} token={session!.tokens.accessToken} />
       ))}
     </div>
   );

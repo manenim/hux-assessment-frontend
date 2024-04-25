@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import ContactLoading from '@/components/contacts/contact-loading'
 
 type Contact = {
   id: string;
@@ -56,7 +57,7 @@ const ContactList = (props: Props) => {
   return (
     <div>
       <div className="">
-        <Suspense fallback={<h1>loading...</h1>}>
+        <Suspense fallback={<ContactLoading />}>
             <ContactsShow  />  
         </Suspense>
         {/* {data.contacts.map((contact: Contact) => (

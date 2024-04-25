@@ -13,7 +13,6 @@ const SignButtons = (props: Props) => {
 
   const handleSignOut = async () => {
     const data = await signOut({ callbackUrl: "/signup" })
-    // useRouter().push(data.url)
   }
 
   

@@ -37,7 +37,7 @@ export const contactsApi = createApi({
     updateContact: builder.mutation({
       query: ({ token, contactId, updatedContact }) => ({
         url: `/contacts/${contactId}`,
-        method: "PUT",
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -57,16 +57,15 @@ export const contactsApi = createApi({
       }),
     }),
 
-    getOneContact: builder.mutation<Contact, { id: string; token: string }>({
-      query: ({ id, token }) => ({
-        url: `/contacts/${id}`,
+    getContactById: builder.query({
+      query: ({ token, contactId }) => ({
+        url: `/contacts/${contactId}`,
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include token for authentication
           "Content-Type": "application/json",
         },
       }),
-      transformResponse: (response: { data: Contact }) => response.data,
     }),
   }),
 });
@@ -77,5 +76,5 @@ export const {
   useAddContactMutation,
   useUpdateContactMutation,
   useDeleteContactMutation,
-  useGetOneContactMutation,
+  useGetContactByIdQuery,
 } = contactsApi;
