@@ -1,15 +1,17 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Backend_URL } from '../../lib/Constants';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Backend_URL } from "../../lib/Constants";
 
 type Contact = {
   firstname: string;
   lastname: string;
   phoneNumber: string;
-}
+};
 
 export const contactsApi = createApi({
   reducerPath: "contactsApi",
   baseQuery: fetchBaseQuery({ baseUrl: `${Backend_URL}` }),
+  tagTypes: ["Contacts"],
+
   endpoints: (builder) => ({
     getAllContacts: builder.query({
       query: (token) => ({
@@ -20,6 +22,7 @@ export const contactsApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      providesTags: ["Contacts"],
     }),
 
     addContact: builder.mutation({
@@ -32,6 +35,7 @@ export const contactsApi = createApi({
         },
         body: newContact,
       }),
+      invalidatesTags: ["Contacts"],
     }),
     // PUT endpoint to update an existing contact
     updateContact: builder.mutation({
@@ -55,6 +59,7 @@ export const contactsApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Contacts"],
     }),
 
     getContactById: builder.query({
@@ -69,7 +74,6 @@ export const contactsApi = createApi({
     }),
   }),
 });
-
 
 export const {
   useGetAllContactsQuery,

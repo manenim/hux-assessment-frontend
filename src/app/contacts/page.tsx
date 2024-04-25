@@ -1,14 +1,10 @@
 "use client";
 
-import Cards from "@/components/contacts/contact-card";
+import ContactLoading from "@/components/contacts/contact-loading";
 import ContactsShow from "@/components/contacts/contacts-show";
-import Sidebar from "@/components/sidebar";
-import { useGetAllContactsQuery } from "@/services/contactData";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import ContactLoading from '@/components/contacts/contact-loading'
 
 type Contact = {
   id: string;
@@ -20,25 +16,24 @@ type Contact = {
 type Props = {};
 
 const ContactList = (props: Props) => {
-
-
-
   const session = useSession();
   if (session.status == "loading") {
-    return <h1>Please wait</h1>;
+    return (
+      <div className="">
+        <ContactLoading />
+      </div>
+    );
   }
   if (session.status == "unauthenticated") {
-    redirect('/login')
+    redirect("/login");
   }
 
-  console.log(session)
+  console.log(session);
   // if (session.status == "authenticated") {
- 
+
   //   const { data, error, isLoading } = useGetAllContactsQuery(session.data.tokens.accessToken)
   // console.log(data)
   // }
-
-
 
   // if (isError) {
   //   console.error("Error fetching contacts:", error);
@@ -58,7 +53,7 @@ const ContactList = (props: Props) => {
     <div>
       <div className="">
         <Suspense fallback={<ContactLoading />}>
-            <ContactsShow  />  
+          <ContactsShow />
         </Suspense>
         {/* {data.contacts.map((contact: Contact) => (
           <Link href={`/contacts/${contact.id}`} key={contact.id}>

@@ -46,7 +46,7 @@ export default function SignupForm() {
           <div className="w-full h-full flex items-center justify-center">
             <form
               onSubmit={handleSubmit}
-              className="border border-gray-300 rounded-xl w-[40%]  min-h-[40%] pt-5 pb-10">
+              className="border border-gray-300 rounded-xl w-[40%]  min-h-[40%] pt-20 pb-10">
               <h1 className="text-[1.5rem] text-center">Sign Up</h1>
               <Input
                 type="text"

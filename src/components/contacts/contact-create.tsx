@@ -5,16 +5,27 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FormInput } from "../../../types/types";
 import { useRouter } from "next/navigation";
+import FormSkeleton from "./form-loader";
+
+type Error = {
+  data: {
+    message: string
+  }
+}
 
 const ContactCreate = () => {
-    const router = useRouter();
+  const router = useRouter();
+  const [err, setErr]= useState(null)
+  
   const formdata = useRef<FormInput>({
     firstname: "",
     lastname: "",
     phoneNumber: "",
+    email: "",
+    homeAddress: "",
   });
 
   const { status, data: sessionData } = useSession();
@@ -22,7 +33,7 @@ const ContactCreate = () => {
 
   // Redirect based on authentication status
   if (status === "loading") {
-    return <h1>Please wait</h1>;
+    return <FormSkeleton />
   }
   if (status === "unauthenticated") {
     redirect("/login");
@@ -37,9 +48,9 @@ const ContactCreate = () => {
     return <h1>Please wait</h1>;
   }
 
-  // Error state
   if (error) {
-    return <h1>Error</h1>;
+    //@ts-ignore
+    setErr(error!.data!.message);
   }
 
   const handleAddContact = async (e: any) => {
@@ -59,7 +70,7 @@ const ContactCreate = () => {
     <div>
       <form
         onSubmit={handleAddContact}
-        className="border border-gray-300 rounded-xl w-[100%] min-h-[40%] pt-5 pb-10">
+        className="border px-6 border-gray-300 rounded-xl w-[40rem] min-h-[40%] pt-5 mt-20 pb-10">
         <h1 className="text-[1.5rem] text-center">Create a contact</h1>
         <Input
           placeholder="firstname"
@@ -76,11 +87,26 @@ const ContactCreate = () => {
           placeholder="Phone number"
           className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
         />
-        <button type="submit" className="py-8 px-12 cursor-pointer">
-          Add Contact
-        </button>
+        <Input
+          onChange={(e) => (formdata.current.email = e.target.value)}
+          placeholder="Email"
+          type="email"
+          className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+        />
+        <Input
+          onChange={(e) => (formdata.current.homeAddress = e.target.value)}
+          placeholder="Home Address"
+          className="w-full px-3 py-4 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+        />
+        <div className="flex items-center justify-center w-full">
+          <button
+            type="submit"
+            className="py-4 mt-4 px-12 rounded-xl bg-[#00246B] text-white cursor-pointer">
+            Add Contact
+          </button>
+        </div>
+        {err && <p className="text-red">{err}</p>}
       </form>
-      jkj
     </div>
   );
 };

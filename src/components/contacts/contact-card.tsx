@@ -36,7 +36,7 @@ export default function ContactCard({contact, token}: Props) {
          contactId: contact.id,
        });
        console.log(res);
-       router.refresh()
+       router.push('/contacts')
      } catch (err) {
        console.log(err);
      }
@@ -71,7 +71,7 @@ export default function ContactCard({contact, token}: Props) {
         </CardBody>
         <Divider />
         <CardFooter>
-          <Link isExternal showAnchorIcon href={`contacts/${contact.id}`}>
+          <Link showAnchorIcon href={`contacts/${contact.id}`}>
             View Details
           </Link>
         </CardFooter>

@@ -27,7 +27,7 @@ const NavButtons = (props: Props) => {
      <>
        <NavbarContent className="hidden sm:flex gap-4" justify="center">
          <NavbarItem>
-           <h3>Welcome {sessionData.user.firstname}</h3>
+           <h3 className='text-xl font-bold'>Welcome back, {sessionData.user.firstname}!!</h3>
          </NavbarItem>
        </NavbarContent>
        <NavbarContent justify="end">

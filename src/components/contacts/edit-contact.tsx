@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Suspense, useRef } from 'react';
 import { FormInput } from '../../../types/types';
 import EditForm from './edit-form';
+import FormSkeleton from './form-loader';
 
 type Props = {
 id: string;
@@ -71,17 +72,16 @@ const EditContactComp = (props: Props) => {
    contactId: id,
  });
 
- if (status === "loading") {
-   return <h1>Loading...</h1>;
- }
-
+  if (status === "loading") {
+    return <FormSkeleton />
+  }
  if (status === "unauthenticated") {
    router.push("/login");
    return null;
  }
 
  if (isLoading) {
-   return <h1>Loading contact...</h1>;
+   return <FormSkeleton />;
  }
 
  if (error) {
@@ -101,7 +101,7 @@ const EditContactComp = (props: Props) => {
 
     console.log(contact)
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="">
           <Suspense fallback={<div>loading...</div>}>
               
               <EditForm data={ contact } token = {session!.tokens.accessToken} />
