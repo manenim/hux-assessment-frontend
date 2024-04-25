@@ -37,7 +37,7 @@ export const contactsApi = createApi({
       }),
       invalidatesTags: ["Contacts"],
     }),
-    // PUT endpoint to update an existing contact
+    // PATCH endpoint to update an existing contact
     updateContact: builder.mutation({
       query: ({ token, contactId, updatedContact }) => ({
         url: `/contacts/${contactId}`,
@@ -48,6 +48,7 @@ export const contactsApi = createApi({
         },
         body: updatedContact,
       }),
+      invalidatesTags: ["Contacts"],
     }),
     // DELETE endpoint to remove a contact
     deleteContact: builder.mutation({

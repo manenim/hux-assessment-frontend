@@ -11,12 +11,10 @@ export default async function NavbarComponent() {
   return (
     <Navbar className="bg-[#00246B] text-white h-[10vh] ">
       <NavbarBrand>
-        {/* <AcmeLogo /> */}
         <Link href="/">
           <p className="font-bold text-inherit text-2xl">Contacts App</p>
         </Link>
       </NavbarBrand>
-      
       <NavButtons />
     </Navbar>
   );

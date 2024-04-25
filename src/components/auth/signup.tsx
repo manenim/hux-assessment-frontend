@@ -4,6 +4,7 @@ import React, { FormEvent, useRef } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useSignupMutation } from "@/services/usersdata";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type FormInput = {
     firstname: string;
@@ -14,7 +15,9 @@ type FormInput = {
 
 export default function SignupForm() {
 
-    // const [signup, {data, isError, isLoading}] = useSignupMutation()
+  const router = useRouter()
+
+    const [signup, {data, isError, isLoading}] = useSignupMutation()
     
     
 
@@ -27,14 +30,15 @@ export default function SignupForm() {
 
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        // try {
-        //     e.preventDefault();
-        //   await signup(formdata.current);
-        //    toast.success("Succesfully registered, Login!");
-        //   console.log(data)
-        // } catch (error) {
-        //     console.error(error)
-        // }
+        try {
+            e.preventDefault();
+          const data = await signup(formdata.current);
+           toast.success("Succesfully registered, Login!");
+          console.log(data)
+          router.push('/login')
+        } catch (error) {
+            console.error(error)
+        }
       
     };
 

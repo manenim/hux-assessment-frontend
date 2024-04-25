@@ -1,5 +1,5 @@
 import { useUpdateContactMutation } from "@/services/contactData";
-import { Button, Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Contact } from "../../../types/types";
@@ -13,8 +13,8 @@ const EditForm = (props: Props) => {
   const [firstname, setFirstname] = useState(props.data.firstname);
   const [lastname, setLastname] = useState(props.data.lastname);
   const [phoneNumber, setPhoneNumber] = useState(props.data.phoneNumber);
-  const [email, setEmail] = useState(props.data.phoneNumber);
-  const [homeAddress, setHomeAddress] = useState(props.data.phoneNumber);
+  const [email, setEmail] = useState(props.data.email);
+  const [homeAddress, setHomeAddress] = useState(props.data.homeAddress);
 
   const [updateContact, { isLoading, error }] = useUpdateContactMutation();
 
@@ -45,7 +45,7 @@ const EditForm = (props: Props) => {
       <form
         onSubmit={handleUpdateContact}
         className="border border-gray-300 rounded-xl w-[40rem] px-6 min-h-[40%] pt-5 mt-20 pb-10">
-        <h1 className="text-[1.5rem] text-center">Edit a contact</h1>
+        <h1 className="text-[1.5rem] text-center">Edit contact</h1>
 
         <Input
           value={firstname}

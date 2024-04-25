@@ -10,12 +10,6 @@ import { FormInput } from "../../../types/types";
 import { useRouter } from "next/navigation";
 import FormSkeleton from "./form-loader";
 
-type Error = {
-  data: {
-    message: string
-  }
-}
-
 const ContactCreate = () => {
   const router = useRouter();
   const [err, setErr]= useState(null)
@@ -31,13 +25,12 @@ const ContactCreate = () => {
   const { status, data: sessionData } = useSession();
   const [addContact, { data, error, isLoading }] = useAddContactMutation();
 
-  // Redirect based on authentication status
+  // Redirects based on authentication status
   if (status === "loading") {
     return <FormSkeleton />
   }
   if (status === "unauthenticated") {
     redirect("/login");
-    return null; // Prevents further rendering until redirect is complete
   }
 
   // Extract token only after checking authentication status
