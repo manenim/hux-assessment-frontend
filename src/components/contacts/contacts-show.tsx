@@ -7,6 +7,12 @@ import ContactLoading from "./contact-loading";
 
 const ContactsShow = () => {
   const { data: session, status } = useSession();
+    const {
+      data: contacts,
+      error,
+      isLoading,
+    } = useGetAllContactsQuery(session?.tokens.accessToken);
+
   const router = useRouter();
 
   if (status === "loading") {
@@ -18,11 +24,6 @@ const ContactsShow = () => {
     return null;
   }
 
-  const {
-    data: contacts,
-    error,
-    isLoading,
-  } = useGetAllContactsQuery(session?.tokens.accessToken);
 
   if (isLoading) {
     return <ContactLoading />;
