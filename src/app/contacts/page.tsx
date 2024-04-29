@@ -28,13 +28,12 @@ const ContactList = (props: Props) => {
     redirect("/login");
   }
 
-  console.log(session);
 
   return (
     <div>
       <div className="">
         <Suspense fallback={<ContactLoading />}>
-          <ContactsShow />
+          <ContactsShow session={session} />
         </Suspense>
       </div>
     </div>

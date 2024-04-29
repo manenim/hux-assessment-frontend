@@ -5,8 +5,7 @@ import { Contact } from "../../../types/types";
 import ContactCard from "./contact-card";
 import ContactLoading from "./contact-loading";
 
-const ContactsShow = () => {
-  const { data: session, status } = useSession();
+const ContactsShow = ({session}:any) => {
     const {
       data: contacts,
       error,
@@ -15,11 +14,11 @@ const ContactsShow = () => {
 
   const router = useRouter();
 
-  if (status === "loading") {
+  if (session.status === "loading") {
     return <ContactLoading />;
   }
 
-  if (status === "unauthenticated") {
+  if (session.status === "unauthenticated") {
     router.push("/login");
     return null;
   }
